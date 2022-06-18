@@ -37,15 +37,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  List<User> _users = [];
+  List<User> _users = []; // database, user is 'n list
 
-  TextEditingController mycontroller = TextEditingController();
+  TextEditingController mycontroller = TextEditingController(); // laat toe dat ek textfield beheer
 
-  bool textScanning = false;
+  bool textScanning = false; //is image processing besig of nie, as besig = TRUE
 
-  XFile? imageFile;
+  XFile? imageFile; // image van gallery of camera
 
-  String scannedText = "";
+  String scannedText = ""; // text wat terugkom van scanner af
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                if (textScanning) const CircularProgressIndicator(),
-                if (!textScanning && imageFile == null)
+                if (textScanning) const CircularProgressIndicator(), // scanning is besig = indicator
+                if (!textScanning && imageFile == null) // scanning nie besig = het ook nie image wat kan scan nie
                   Container(
                     width: 300,
                     height: 300,
                     color: Colors.grey[300]!,
                   ),
-                if (imageFile != null) Image.file(File(imageFile!.path)),
+                if (imageFile != null) Image.file(File(imageFile!.path)), // daar is nou image, en wys nou image
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       border: OutlineInputBorder(),
                       hintText: 'Scanned Digits',
                     ),
-                    controller: mycontroller,
+                    controller: mycontroller, //controller beheer die textfield
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         color: Colors.red,
                       ),
                       IconButton(
-                        onPressed :(){_getData(mycontroller.text);},
+                        onPressed :(){_getData(mycontroller.text);}, //getdata function doen http request, connect na databases en doen... controller.text is wat in textfield staan
                         icon: Icon(Icons.check),
                         color: Colors.green,
                       ),
@@ -183,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                     Text(_users.isEmpty ? 'No User' : _users.first.name),
+                     Text(_users.isEmpty ? 'No User' : _users.first.name), //_users is 'n list soos ek define het. Check is users is empty is, (list met niks in nie) (bv as database nie oop is nie) as true, ... , as falsegaan deur list en kry EERSTE instance met ## numbber en gee name' het
                     ],
                   ),
                 ),
@@ -200,9 +200,9 @@ class _MyHomePageState extends State<MyHomePage> {
         textScanning = true;
         imageFile = pickedImage;
         setState(() {});
-        getRecognisedText(pickedImage);
+        getRecognisedText(pickedImage); //doen die function met die image
       }
-    } catch (e) {
+    } catch (e) { //kan steeds aangaan as app error het
       textScanning = false;
       imageFile = null;
 	  scannedText = "Error occured while scanning";
@@ -210,40 +210,39 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void getRecognisedText(XFile image) async {
-    final inputImage = InputImage.fromFilePath(image.path);
-    final textDetector = GoogleMlKit.vision.textDetector();
-    RecognisedText recognisedText = await textDetector.processImage(inputImage);
-    await textDetector.close();
-    scannedText = "";
-    String text = "";
-    for (TextBlock block in recognisedText.blocks) {
+  void getRecognisedText(XFile image) async { // hier update ek scanned text, doen die function met die image (async function hardloop in agtergrond as dit gecall word)
+    final inputImage = InputImage.fromFilePath(image.path); //inputImage is die image wat ek gestuur het
+    final textDetector = GoogleMlKit.vision.textDetector(); //gebruik nou Google package, nou kan ek textdetection functions gebruik = instantiate textdetector object
+    RecognisedText recognisedText = await textDetector.processImage(inputImage); //R=type van variable (die type word deur Google ML), r=naam van variable. Hy doen dit met inputImage
+    await textDetector.close(); //hy moet geclose word, want ons is nou klaar (await: wag vir die om eers klaar te maak en vir response om terug te kom)
+    scannedText = ""; //dit wat terugkom van scanner af
+    String text = ""; //dis wat wys in inputfield
+    for (TextBlock block in recognisedText.blocks) { //Google ML define hierdie types
       for (TextLine line in block.lines) {
         // scannedText = scannedText + line.text + "\n";
-        text = text + line.text + "\n";
+        text = text + line.text;// + "\n"; // sodat geen enters
       }
     }
-    scannedText = formatNumber(text);
-    mycontroller.text = scannedText;
-    textScanning = false;
-    setState(() {});
+    scannedText = formatNumber(text); //format scanned text
+    mycontroller.text = scannedText; //display scanned text in textfield
+    textScanning = false; // loading bar gaan weg
+    setState(() {}); //update als, refresh
   }
-
-  String formatNumber(String number){
-    List<String> list= ['?','G', 'l', '|', 'I', 's','S', 'o','O','z','Z','i','b','q'];
-    List<String> splitNumber = number.split(""); // split die nommer op
+//hardcode....
+  String formatNumber(String number){ //String1 = type  wat function return // Sring2 = dit wat function ontvang
+    List<String> list= ['?','G', 'l', '|', 'I', 's','S', 'o','O','z','Z','i','b','q','a'];
+    List<String> splitNumber = number.split(""); // split die nommer op // as mens n string split, verander dit in n string // "" hy moet als split, " " sal bv by elke spasie split //split the 'text'variable
     for(String item in list){
-      for(String number in splitNumber){
-        if(splitNumber.indexOf(item) != -1){
-          int index = splitNumber.indexOf(item);
-          String val = splitNumber[index];
-
-          String replaceNum = handleNumberReplace(val);
-          splitNumber[index] = replaceNum;
+      for(String number in splitNumber){ // gaan deur gesplitde text 'list'
+        if(splitNumber.indexOf(item) != -1){ //(daar is nie n posisie -1 nie) as die index nie -1 is nie, dan is een van die ?GL in die text
+          int index = splitNumber.indexOf(item); //gee die index van die verkeerde ding (?GL)
+          String val = splitNumber[index]; // kry die value wat dit is (is dit 'n ?/G/L)
+          String replaceNum = handleNumberReplace(val); //handlenumberreplace function vervang verkeerde value met ...
+          splitNumber[index] = replaceNum; //set waarde na regte value toe
         }
       }
     }
-    return splitNumber.join("");
+    return splitNumber.join("").replaceAll(" ", ""); //nou wil ons weer list in string verander (" " sou oral waar daar 'n spasie was gejooin het)//haal spasies uit
   }
 
   String handleNumberReplace(String num) {
@@ -281,26 +280,28 @@ class _MyHomePageState extends State<MyHomePage> {
       case 'q':
         return '9';
         break;
+      case 'a':
+        return '9';
+        break;
     }
-    return '';
+    return ''; // maak seker daar word altyd n type string return
   }
 
   Future<void> _getData(String number) async {
     // var url = 'https://jsonplaceholder.typicode.com/posts';
-    var url = 'http://192.168.56.1/database.php?number='+number; //EMULATOR
+    var url = 'http://192.168.56.1/database.php?number='+number; //EMULATOR // +number = string interpolation, maak value van number deel van die string (concatenate)
     // var url = 'http://172.20.10.8:80/database.php'; //MOBILE
     // var url = 'http://10.0.2.207:80/database.php'; //MOBILE
 
-    http.get(Uri.parse(url)).then((data) {
-      return json.decode(data.body);
+    http.get(Uri.parse(url)).then((data) { //sit url in regte formaat
+      return json.decode(data.body); //maak seker dis in json formaat
     }).then((data) {
-      _users.clear();
-      for (var json in data) {
-        print(json);
+      _users.clear(); //clear list
+      for (var json in data) { //gaan deur list, for loop hardloop nie as daar nie iets terugkom van die database af nie
+        print(json); //vir testing
         if(!_users.contains(json)){
           _users.add(User.fromJson(json));
           setState(() {
-
           });
         }
       }
