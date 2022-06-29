@@ -44,7 +44,7 @@ class Landing extends StatelessWidget {
             style: GoogleFonts.getFont(
               'Poppins',
               fontWeight: FontWeight.w500,
-              letterSpacing: 2,
+              letterSpacing: 1.5,
               fontSize: 12,
             ),
           ),

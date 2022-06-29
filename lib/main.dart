@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 300,
                     height: 300,
                     color: Colors.grey[200],
+
                   ),
                 if (imageFile != null) Image.file(File(imageFile!.path)), // daar is nou image, en wys nou image
                 Row(
@@ -179,9 +180,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       hintText: 'Scanned Student Number',
                     ),
                     controller: mycontroller, //controller beheer die textfield
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,letterSpacing: 1.5),
                   ),
-                ),
+                  ),
                 Container(
                   margin: const EdgeInsets.symmetric(
                       vertical: 5, horizontal: 5),
@@ -207,7 +208,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                     Text(_users.isEmpty ? 'No User' : formatUsers(_users)), //_users is 'n list soos ek define het. Check is users is empty is, (list met niks in nie) (bv as database nie oop is nie) as true, ... , as falsegaan deur list en kry EERSTE instance met ## numbber en gee name' het
+                     Text(_users.isEmpty ? 'No User' : formatUsers(_users),
+                       style: GoogleFonts.getFont(
+                         'Poppins',
+                         fontWeight: FontWeight.w500,
+                         letterSpacing: 1.5,
+                       ),
+                     )
+                        //_users is 'n list soos ek define het. Check is users is empty is, (list met niks in nie) (bv as database nie oop is nie) as true, ... , as falsegaan deur list en kry EERSTE instance met ## numbber en gee name' het
                     ],
                   ),
                 ),
