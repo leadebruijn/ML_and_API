@@ -243,7 +243,7 @@ class Intro extends StatelessWidget {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                           child: Text(
-                            'Once the digit recognition has started and the digit is correclty identified, click the check icon. If the recongised digit is incorrect, edit the textfield and ensure the last 4 digits are correct before pressing the ceck button.',
+                            'Once the digit recognition has started and the digit is correctly identified, click the check icon. If the recognised digit is incorrect, edit the text field and ensure the last 4 digits are correct before pressing the check button.',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.getFont(
                               'Poppins',
@@ -286,7 +286,7 @@ class Intro extends StatelessWidget {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                           child: Text(
-                            'Once the check button is pressed, the class number of the student number or possible udent numbers will appear at the bottom of the screen.\n\nClick below to start scanning:',
+                            'Once the check button is pressed, the class number of the student number or possible student numbers will appear at the bottom of the screen.\n\nClick below to start scanning:',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.getFont(
                               'Poppins',

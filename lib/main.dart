@@ -91,7 +91,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 300,
                     height: 300,
                     color: Colors.grey[200],
-
+                      // decoration: BoxDecoration(
+                      //     border: Border.all(color: Colors.black))
+                    // decoration: BoxDecoration(
+                    //   borderRadius: BorderRadius.circular(4),
+                    //   shape: BoxShape.rectangle,
+                    //   border: Border.all(
+                    //     color: Colors.black,
+                    //     width: 2,
+                    //   ),
+                    // ),
                   ),
                 if (imageFile != null) Image.file(File(imageFile!.path)), // daar is nou image, en wys nou image
                 Row(
@@ -228,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String formatUsers(List<User> users) {
     String userString = '';
     users.forEach((user) {
-      userString = userString + "${user.number} - ${user.name}" + "\n";
+      userString = userString + "${user.number} - class ${user.name}" + "\n";
     });
     return userString;
   }
@@ -338,9 +347,12 @@ class _MyHomePageState extends State<MyHomePage> {
     String formattednumber = number.substring(number.length-4, number.length);
     print(formattednumber);
     // var url = 'https://jsonplaceholder.typicode.com/posts';
-    var url = 'http://192.168.56.1/database.php?number='+formattednumber; //EMULATOR // +number = string interpolation, maak value van number deel van die string (concatenate)
-    // var url = 'http://172.20.10.8:80/database.php'; //MOBILE
-    // var url = 'http://10.0.2.207:80/database.php'; //MOBILE
+    // var url = 'http://192.168.56.1/database.php?number='+formattednumber; //EMULATOR // +number = string interpolation, maak value van number deel van die string (concatenate)
+    // var url = 'http://192.168.1.10:80/database.php?number='+formattednumber; //MOBILE HUIS
+    var url = 'http://192.168.56.1:80/database.php?number='+formattednumber; //MOBILE FLAT
+    // var url = 'http://10.0.2.207:80/database.php?number='+formattednumber; //MOBILE
+    // var url = 'http://192.168.1.10/database.php?number='+formattednumber;
+
 
     http.get(Uri.parse(url)).then((data) { //sit url in regte formaat
       return json.decode(data.body); //maak seker dis in json formaat

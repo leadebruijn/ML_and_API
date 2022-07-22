@@ -38,14 +38,17 @@ class Landing extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text(
-            'This app is for scaning handwritten Student numbers',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.getFont(
-              'Poppins',
-              fontWeight: FontWeight.w500,
-              letterSpacing: 1.5,
-              fontSize: 12,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'This application is for scanning handwritten student numbers and returning the class number of the student',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.getFont(
+                'Poppins',
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1.5,
+                fontSize: 12,
+              ),
             ),
           ),
           Center(
