@@ -38,6 +38,9 @@ dependencies:
   google_ml_kit: ^0.7.3
   image_picker: ^0.8.4+9
   localregex: ^3.0.3
+  camera: ^0.9.4+18
+  path_provider: ^2.0.9
+  path: ^1.8.0
 
 
 dev_dependencies:

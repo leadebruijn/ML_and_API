@@ -7,13 +7,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:text_recognition/landing.dart';
 import 'package:text_recognition/user.dart';
 import 'package:http/http.dart' as http;
+import 'firstfourgroups.dart';
 import 'user.dart';
 import 'package:localregex/localregex.dart';
+import 'package:camera/camera.dart';
 
 //String regEx = "^[0-9]{8}$"; iets soos dit????
+List<CameraDescription>? cameras;
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -40,8 +45,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  CameraController? controller;
+  String imagePath = "";
 
-  List<User> _users = []; // database, user is 'n list
+  List<Firstfour> _firstfour = []; // database, user is 'n list
 
   TextEditingController mycontroller = TextEditingController(); // laat toe dat ek textfield beheer
 
@@ -88,19 +95,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (textScanning) const CircularProgressIndicator(), // scanning is besig = indicator
                 if (!textScanning && imageFile == null) // scanning nie besig = het ook nie image wat kan scan nie
                   Container(
-                    width: 300,
-                    height: 300,
-                    color: Colors.grey[200],
-                      // decoration: BoxDecoration(
-                      //     border: Border.all(color: Colors.black))
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.circular(4),
-                    //   shape: BoxShape.rectangle,
-                    //   border: Border.all(
-                    //     color: Colors.black,
-                    //     width: 2,
-                    //   ),
-                    // ),
+                    // width: 300,
+                    // height: 300,
+                    // color: Colors.grey[200],
+                    //   // decoration: BoxDecoration(
+                    //   //     border: Border.all(color: Colors.black))
+                    // // decoration: BoxDecoration(
+                    // //   borderRadius: BorderRadius.circular(4),
+                    // //   shape: BoxShape.rectangle,
+                    // //   border: Border.all(
+                    // //     color: Colors.black,
+                    // //     width: 2,
+                    // //   ),
+                    // // ),
+                    width: 200,
+                    height: 200,
+                    child: AspectRatio(
+                      aspectRatio: controller!.value.aspectRatio,
+                      child: CameraPreview(controller!),
+                    ),
+
                   ),
                 if (imageFile != null) Image.file(File(imageFile!.path)), // daar is nou image, en wys nou image
                 Row(
@@ -204,9 +218,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       //   color: Colors.red,
                       // ),
                       IconButton(
-                        onPressed :(){_getData(mycontroller.text);}, //getdata function doen http request, connect na databases en doen... controller.text is wat in textfield staan
+                        // onPressed :(){_getData(mycontroller.text);}, //getdata function doen http request, connect na databases en doen... controller.text is wat in textfield staan
                         icon: Icon(Icons.check),
                         color: Colors.green,
+                        onPressed: () async {
+                          try {
+                            final image = await controller!.takePicture();
+                            setState(() {
+                              imagePath = image.path;
+                            });
+                            getRecognisedText(image);
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -217,7 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                     Text(_users.isEmpty ? 'No User' : formatUsers(_users),
+                     Text(_firstfour.isEmpty ? 'No User' : formatUsers(_firstfour),
                        style: GoogleFonts.getFont(
                          'Poppins',
                          fontWeight: FontWeight.w500,
@@ -234,10 +259,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  String formatUsers(List<User> users) {
+  String formatUsers(List<Firstfour> firstfour) {
     String userString = '';
-    users.forEach((user) {
-      userString = userString + "${user.number} - class ${user.name}" + "\n";
+    firstfour.forEach((ff) {
+      userString = userString + "${ff.studentnumber} - class ${ff.group}" + "\n";
     });
     return userString;
   }
@@ -278,11 +303,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // }
 
     text = text + recognisedText.blocks[recognisedText.blocks.length-1].text;
-
+//roep hier al database
     scannedText = formatNumber(text); //format scanned text
     mycontroller.text = scannedText; //display scanned text in textfield //regex sal hier inkom probs??
     textScanning = false; // loading bar gaan weg
     setState(() {}); //update als, refresh
+    print('call database');
+    _getData(text);
   }
 //hardcode....
   String formatNumber(String number){ //String1 = type  wat function return // Sring2 = dit wat function ontvang
@@ -344,24 +371,30 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _getData(String number) async {
-    String formattednumber = number.substring(number.length-4, number.length);
-    print(formattednumber);
+    // String formattednumber = number.substring(number.length-4, number.length);
+    // print(formattednumber);
+    print(number);
     // var url = 'https://jsonplaceholder.typicode.com/posts';
-    // var url = 'http://192.168.56.1/database.php?number='+formattednumber; //EMULATOR // +number = string interpolation, maak value van number deel van die string (concatenate)
+    // var url = 'http://192.168.56.1/database.php?number='+formattednumber; //EMULATOR // +number = string interpolation, maak value van number deel van die string (concatenate) MOCK DATABASE
     // var url = 'http://192.168.1.10:80/database.php?number='+formattednumber; //MOBILE HUIS
-    var url = 'http://192.168.56.1:80/database.php?number='+formattednumber; //MOBILE FLAT
+    // var url = 'http://192.168.56.1:80/database.php?number='+formattednumber; //MOBILE FLAT MOCK DATABASE
     // var url = 'http://10.0.2.207:80/database.php?number='+formattednumber; //MOBILE
     // var url = 'http://192.168.1.10/database.php?number='+formattednumber;
+    // var url = 'http://192.168.56.1/firstfourgroups.php?studentnumber='+formattednumber; //EMULATOR REAL DATABASE
+    // var url = 'http://192.168.56.1/firstfourgroups.php?studentnumber='+number; //EMULATOR REAL DATABASE
+    // var url = 'http://192.168.56.1/firstfourgroups.php?studentnumber='+number; //MOBILE REAL DATABASE
+    var url = 'http://10.0.2.59/firstfourgroups.php?studentnumber='+number;
 
 
     http.get(Uri.parse(url)).then((data) { //sit url in regte formaat
+      print('hello');
       return json.decode(data.body); //maak seker dis in json formaat
     }).then((data) {
-      _users.clear(); //clear list
+      _firstfour.clear(); //clear list
       for (var json in data) { //gaan deur list, for loop hardloop nie as daar nie iets terugkom van die database af nie
         print(json); //vir testing
-        if(!_users.contains(json)){
-          _users.add(User.fromJson(json));
+        if(!_firstfour.contains(json)){
+          _firstfour.add(Firstfour.fromJson(json));
           setState(() {
           });
         }
@@ -373,7 +406,24 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
+    if (cameras != null){
+      controller = CameraController(cameras![0], ResolutionPreset.max);
+    }
+
+    controller?.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {});
+    });
+
   }
 }
