@@ -13,7 +13,7 @@ class Intro extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: AppBar(
-          backgroundColor: Color(0xFFBEEAF3),
+          backgroundColor: Color(0xFFEFBC39),
           automaticallyImplyLeading: false,
           flexibleSpace: Align(
             alignment: AlignmentDirectional(0, 0),
@@ -22,7 +22,7 @@ class Intro extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.getFont(
                 'Poppins',
-                color: Colors.black,
+                color: Color(0xFF490808),
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
                 fontStyle: FontStyle.normal,
@@ -34,7 +34,7 @@ class Intro extends StatelessWidget {
           elevation: 2,
         ),
       ),
-      backgroundColor: Color(0xFFFAF3FF),
+      backgroundColor: Color(0xFFFFFFFF),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -43,83 +43,21 @@ class Intro extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
-                      child: Container(
-                        constraints: BoxConstraints(
-                          maxHeight: double.infinity,
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        // height: 200,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFFF6CD),
-                          borderRadius: BorderRadius.circular(4),
-                          shape: BoxShape.rectangle,
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 2,
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
-                              child: Text(
-                                'Below is an example of the front cover of a test:',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.getFont(
-                                  'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 1.5,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(8, 4, 8, 8),
-                              child: Container(
-                                width: 150,
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 2,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                child: Image.asset(
-                                  'assets/vb.jpg',
-                                  // width: 150,
-                                  // height: 250,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8, 4, 8, 4),
+                  padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                   child: Container(
                     constraints: BoxConstraints(
                       maxHeight: double.infinity,
                     ),
                     width: MediaQuery.of(context).size.width,
-                    // height: 250,
+                    height: 350,
                     decoration: BoxDecoration(
                       color: Color(0xFFFFF6CD),
                       borderRadius: BorderRadius.circular(4),
                       shape: BoxShape.rectangle,
                       border: Border.all(
-                        color: Colors.black,
+                        color: Color(0xFF490808),
                         width: 2,
                       ),
                     ),
@@ -139,7 +77,7 @@ class Intro extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       letterSpacing: 1.5,
-                                      color: Colors.black,
+                                      color: Color(0xFF490808),
                                     ),
                                     children: [
                                       TextSpan(
@@ -174,7 +112,7 @@ class Intro extends StatelessWidget {
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 4, 8, 8),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -189,7 +127,7 @@ class Intro extends StatelessWidget {
                                   ),
                                 ),
                                 child: Image.asset(
-                                  'assets/reg.jpg',
+                                  'assets/vb1.jpg',
                                   // width: 150,
                                   // height: 250,
                                   fit: BoxFit.fill,
@@ -205,7 +143,7 @@ class Intro extends StatelessWidget {
                                   ),
                                 ),
                                 child: Image.asset(
-                                  'assets/verkeerd.jpg',
+                                  'assets/vb2.jpg',
                                   // width: 150,
                                   // height: 250,
                                   fit: BoxFit.fill,
@@ -218,6 +156,70 @@ class Intro extends StatelessWidget {
                     ),
                   ),
                 ),
+                // Column(
+                //   mainAxisSize: MainAxisSize.max,
+                //   children: [
+                //     Padding(
+                //       padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
+                //       child: Container(
+                //         constraints: BoxConstraints(
+                //           maxHeight: double.infinity,
+                //         ),
+                //         width: MediaQuery.of(context).size.width,
+                //         // height: 200,
+                //         decoration: BoxDecoration(
+                //           color: Color(0xFFFFF6CD),
+                //           borderRadius: BorderRadius.circular(4),
+                //           shape: BoxShape.rectangle,
+                //           border: Border.all(
+                //             color: Color(0xFF490808),
+                //             width: 2,
+                //           ),
+                //         ),
+                //         child: Column(
+                //           mainAxisSize: MainAxisSize.max,
+                //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //           children: [
+                //             Padding(
+                //               padding:
+                //               EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
+                //               child: Text(
+                //                 'Hover the camera of the application over the front cover of the test',
+                //                 textAlign: TextAlign.center,
+                //                 style: GoogleFonts.getFont(
+                //                   'Poppins',
+                //                   fontWeight: FontWeight.w500,
+                //                   letterSpacing: 1.5,
+                //                   color: Color(0xFF490808),
+                //                 ),
+                //               ),
+                //             ),
+                //             Padding(
+                //               padding:
+                //               EdgeInsetsDirectional.fromSTEB(8, 4, 8, 8),
+                //               child: Container(
+                //                 width: 150,
+                //                 height: 200,
+                //                 decoration: BoxDecoration(
+                //                   border: Border.all(
+                //                     width: 2,
+                //                     color: Color(0xFF490808),
+                //                   ),
+                //                 ),
+                //                 child: Image.asset(
+                //                   'assets/vb.jpg',
+                //                   // width: 150,
+                //                   // height: 250,
+                //                   fit: BoxFit.fill,
+                //                 ),
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 // Generated code for this Container Widget...
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8, 4, 8, 8),
@@ -226,13 +228,13 @@ class Intro extends StatelessWidget {
                       maxHeight: double.infinity,
                     ),
                     width: MediaQuery.of(context).size.width,
-                    height: 150,
+                    height: 250,
                     decoration: BoxDecoration(
                       color: Color(0xFFFFF6CD),
                       borderRadius: BorderRadius.circular(4),
                       shape: BoxShape.rectangle,
                       border: Border.all(
-                        color: Colors.black,
+                        color: Color(0xFF490808),
                         width: 2,
                       ),
                     ),
@@ -243,27 +245,52 @@ class Intro extends StatelessWidget {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                           child: Text(
-                            'Once the digit recognition has started and the digit is correctly identified, click the check icon. If the recognised digit is incorrect, edit the text field and ensure the last 4 digits are correct before pressing the check button.',
+                            'If the student number is in the correct position as indicated above, click the icon shown below:',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.getFont(
                               'Poppins',
                               fontWeight: FontWeight.w500,
                               fontSize: 12,
+                              color: Color(0xFF490808),
                             ),
                           ),
                         ),
-                        Icon(
-                          Icons.check,
-                          color: Color(0xFF38B635),
-                          size: 24,
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF490808), // Background color
+                          ),
+                          icon: Icon( // <-- Icon
+                            Icons.camera_alt,
+                            size: 24.0,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                          label: Text('CAPTURE'), // <-- Text
+                        ),
+                        // Icon(
+                        //   Icons.check,
+                        //   color: Color(0xFF38B635),
+                        //   size: 24,
+                        // ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
+                          child: Text(
+                            'The class number will now appear at the bottom of the screen. If the student number was scanned incorrectly, adjust the position of the camera and press the capture button again until the correct class number appears on the screen.',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.getFont(
+                              'Poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: Color(0xFF490808),
+                            ),
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8, 4, 8, 8),
+                  padding: EdgeInsetsDirectional.fromSTEB(8,0, 8, 8),
                   child: Container(
                     constraints: BoxConstraints(
                       maxHeight: double.infinity,
@@ -275,7 +302,7 @@ class Intro extends StatelessWidget {
                       borderRadius: BorderRadius.circular(4),
                       shape: BoxShape.rectangle,
                       border: Border.all(
-                        color: Colors.black,
+                        color: Color(0xFF490808),
                         width: 2,
                       ),
                     ),
@@ -286,13 +313,78 @@ class Intro extends StatelessWidget {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                           child: Text(
-                            'Once the check button is pressed, the class number of the student number or possible student numbers will appear at the bottom of the screen.\n\nClick below to start scanning:',
+                            'If the application completely fails to detect the student number, manually type the student number in the provided textbox and click the icon shown below:',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.getFont(
+                              'Poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: Color(0xFF490808),
+                            ),
+                          ),
+                        ),
+                        ElevatedButton.icon(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            primary: Color(0xFF490808), // Background color
+                          ),
+                          icon: Icon( // <-- Icon
+                            Icons.camera_alt,
+                            size: 24.0,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                          label: Text('SEND'), // <-- Text
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
+                          child: Text(
+                            'After clicking the send button, the class number of the typed student number will appear at the bottom of the screen.',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.getFont(
+                              'Poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: Color(0xFF490808),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 8),
+                  child: Container(
+                    constraints: BoxConstraints(
+                      maxHeight: double.infinity,
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: 130,
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFFF6CD),
+                      borderRadius: BorderRadius.circular(4),
+                      shape: BoxShape.rectangle,
+                      border: Border.all(
+                        color: Color(0xFF490808),
+                        width: 2,
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
+                          child: Text(
+                            'Click below to start scanning:',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.getFont(
                               'Poppins',
                               fontWeight: FontWeight.w500,
                               fontSize: 12,
                               letterSpacing: 1.5,
+                              color: Color(0xFF490808),
                             ),
                           ),
                         ),
@@ -301,7 +393,7 @@ class Intro extends StatelessWidget {
                             alignment: AlignmentDirectional(0, 0),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Color(0xFFD3F6CC),
+                                primary: Color(0xFF490808),
                               ),
                               onPressed: () {
                                 Navigator.push(
@@ -310,7 +402,7 @@ class Intro extends StatelessWidget {
                                       builder: (context) => MyHomePage()),
                                 );
                               },
-                              child: const Text('Start Scanning!', style: TextStyle(color: Colors.black, letterSpacing: 2.5)),
+                              child: const Text('START SCANNING', style: TextStyle(color: Colors.white, letterSpacing: 2.5)),
                             )
                           ),
                         ),

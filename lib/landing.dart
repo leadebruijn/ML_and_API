@@ -12,7 +12,7 @@ class Landing extends StatelessWidget {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: AppBar(
-          backgroundColor: Color(0xFFBEEAF3),
+          backgroundColor: Color(0xFFEFBC39),
           automaticallyImplyLeading: false,
           flexibleSpace: Align(
             alignment: AlignmentDirectional(0, 0),
@@ -21,7 +21,7 @@ class Landing extends StatelessWidget {
               textAlign: TextAlign.center,
               style: GoogleFonts.getFont(
                 'Poppins',
-                color: Colors.black,
+                color: Color(0xFF490808),
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
                 fontStyle: FontStyle.normal,
@@ -48,6 +48,7 @@ class Landing extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 letterSpacing: 1.5,
                 fontSize: 12,
+                color: Color(0xFF490808),
               ),
             ),
           ),
@@ -55,7 +56,7 @@ class Landing extends StatelessWidget {
             child:
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFFD3F6CC),
+                primary: Color(0xFF490808),
               ),
               onPressed: () {
                 Navigator.push(
@@ -64,7 +65,7 @@ class Landing extends StatelessWidget {
                       builder: (context) => Intro()),
                 );
               },
-              child: const Text('HOW IT WORKS', style: TextStyle(color: Colors.black, letterSpacing: 2.5)),
+              child: const Text('HOW IT WORKS', style: TextStyle(color: Colors.white, letterSpacing: 2.5)),
             )
           ),
           Text(
@@ -75,6 +76,7 @@ class Landing extends StatelessWidget {
               fontWeight: FontWeight.w500,
               letterSpacing: 2,
               fontSize: 8,
+                color: Color(0xFF490808)
             ),
           ),
         ],

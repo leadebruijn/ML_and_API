@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:text_recognition/landing.dart';
 import 'package:text_recognition/user.dart';
 import 'package:http/http.dart' as http;
+import 'Intro.dart';
 import 'firstfourgroups.dart';
 import 'user.dart';
 import 'package:localregex/localregex.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Landing(),
+      home: MyHomePage(),
     );
   }
 }
@@ -64,16 +65,16 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50),
         child: AppBar(
-          backgroundColor: Color(0xFFBEEAF3),
+          backgroundColor: Color(0xFFEFBC39),
           automaticallyImplyLeading: false,
           flexibleSpace: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Text(
-              'SCAN',
+              'SCAN TESTS',
               textAlign: TextAlign.center,
               style: GoogleFonts.getFont(
                 'Poppins',
-                color: Colors.black,
+                color: Color(0xFF490808),
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
                 fontStyle: FontStyle.normal,
@@ -86,176 +87,322 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Color(0xFFFFF6CD),
       body: Center(
-          child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(8, 12, 8, 0),
+                  child:
+                  MaterialButton(
+                    color: Color(0xFF490808),
+                    shape: const CircleBorder(),
+                    onPressed: () {},
+                    child: const Padding(
+                      padding: EdgeInsets.all(3),
+                      child: Text(
+                        'i',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    ),
+                  )
+      //             ElevatedButton(
+      //               child: const Text(
+      //                 'i',
+      //                 style: TextStyle(fontSize: 20),
+      //               ),
+      //               onPressed: () {
+      //                     Navigator.push(
+      //                       context,
+      //                       MaterialPageRoute(
+      //                           builder: (context) => Intro()),
+      //                     );
+      //               },
+      //               style: ElevatedButton.styleFrom(
+      //
+      //                   fixedSize: const Size(5, 5),
+      //                   shape: const CircleBorder(),
+      //
+      //             ),
+      // ),
+                  // ElevatedButton(
+                  //   style: ElevatedButton.styleFrom(
+                  //     primary: Color(0xFF490808),
+                  //   ),
+                  //   onPressed: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => Intro()),
+                  //     );
+                  //   },
+                  //   child: const Text('HOW IT WORKS', style: TextStyle(color: Colors.white, letterSpacing: 2.5)),
+                  // )
+              ),
+              SingleChildScrollView(
         child: Container(
-            margin: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                if (textScanning) const CircularProgressIndicator(), // scanning is besig = indicator
-                if (!textScanning && imageFile == null) // scanning nie besig = het ook nie image wat kan scan nie
-                  Container(
-                    // width: 300,
-                    // height: 300,
-                    // color: Colors.grey[200],
-                    //   // decoration: BoxDecoration(
-                    //   //     border: Border.all(color: Colors.black))
-                    // // decoration: BoxDecoration(
-                    // //   borderRadius: BorderRadius.circular(4),
-                    // //   shape: BoxShape.rectangle,
-                    // //   border: Border.all(
-                    // //     color: Colors.black,
-                    // //     width: 2,
-                    // //   ),
-                    // // ),
-                    width: 200,
-                    height: 200,
-                    child: AspectRatio(
-                      aspectRatio: controller!.value.aspectRatio,
-                      child: CameraPreview(controller!),
-                    ),
-
-                  ),
-                if (imageFile != null) Image.file(File(imageFile!.path)), // daar is nou image, en wys nou image
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                margin: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.only(top: 10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xFFD3F6CC),
-                            onPrimary: Colors.grey,
-                            shadowColor: Colors.grey[400],
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                          ),
-                          onPressed: () {
-                            getImage(ImageSource.gallery);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.image,
-                                  size: 20,
-                                ),
-                                // Text(
-                                //   "Gallery",
-                                //   style: TextStyle(
-                                //       fontSize: 13, color: Colors.grey[600]),
-                                // )
-                              ],
-                            ),
-                          ),
-                        )
+                    if (textScanning) const CircularProgressIndicator(), // scanning is besig = indicator
+                    if (!textScanning && imageFile == null) // scanning nie besig = het ook nie image wat kan scan nie
+                      Container(
+                        // width: 300,
+                        // height: 300,
+                        // color: Colors.grey[200],
+                        //   // decoration: BoxDecoration(
+                        //   //     border: Border.all(color: Colors.black))
+                        // // decoration: BoxDecoration(
+                        // //   borderRadius: BorderRadius.circular(4),
+                        // //   shape: BoxShape.rectangle,
+                        // //   border: Border.all(
+                        // //     color: Colors.black,
+                        // //     width: 2,
+                        // //   ),
+                        // // ),
+                        width: 250,
+                        height: 350,
+                        child: AspectRatio(
+                          aspectRatio: controller!.value.aspectRatio,
+                          child: CameraPreview(controller!),
+                        ),
+
+                      ),
+                    if (imageFile != null) Image.file(File(imageFile!.path)), // daar is nou image, en wys nou image
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            padding: const EdgeInsets.only(top: 10),
+                            // child: ElevatedButton(
+                            //   style: ElevatedButton.styleFrom(
+                            //     primary: Color(0xFFD3F6CC),
+                            //     onPrimary: Colors.grey,
+                            //     shadowColor: Colors.grey[400],
+                            //     elevation: 10,
+                            //     shape: RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.circular(8.0)),
+                            //   ),
+                            //   onPressed: () {
+                            //     getImage(ImageSource.gallery);
+                            //   },
+                            //   child: Container(
+                            //     margin: const EdgeInsets.symmetric(
+                            //         vertical: 5, horizontal: 5),
+                            //     child: Column(
+                            //       mainAxisSize: MainAxisSize.min,
+                            //       children: [
+                            //         Icon(
+                            //           Icons.image,
+                            //           size: 20,
+                            //         ),
+                            //         // Text(
+                            //         //   "Gallery",
+                            //         //   style: TextStyle(
+                            //         //       fontSize: 13, color: Colors.grey[600]),
+                            //         // )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // )
+                        ),
+                        Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            padding: const EdgeInsets.only(top: 10),
+                            // child: ElevatedButton(
+                            //   style: ElevatedButton.styleFrom(
+                            //     primary: Color(0xFFD3F6CC),
+                            //     onPrimary: Colors.grey,
+                            //     shadowColor: Colors.grey[400],
+                            //     elevation: 10,
+                            //     shape: RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.circular(8.0)),
+                            //   ),
+                            //   onPressed: () {
+                            //     getImage(ImageSource.camera);
+                            //   },
+                            //   child: Container(
+                            //     margin: const EdgeInsets.symmetric(
+                            //         vertical: 5, horizontal: 5),
+                            //     child: Column(
+                            //       mainAxisSize: MainAxisSize.min,
+                            //       children: [
+                            //         Icon(
+                            //           Icons.camera_alt,
+                            //           size: 20,
+                            //         ),
+                            //         // Text(
+                            //         //   "Camera",
+                            //         //   style: TextStyle(
+                            //         //       fontSize: 13, color: Colors.grey[600]),
+                            //         // )
+                            //       ],
+                            //     ),
+                            //   ),
+                            // )
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5,
                     ),
                     Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        padding: const EdgeInsets.only(top: 10),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xFFD3F6CC),
-                            onPrimary: Colors.grey,
-                            shadowColor: Colors.grey[400],
-                            elevation: 10,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0)),
-                          ),
-                          onPressed: () {
-                            getImage(ImageSource.camera);
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 5),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.camera_alt,
-                                  size: 20,
-                                ),
-                                // Text(
-                                //   "Camera",
-                                //   style: TextStyle(
-                                //       fontSize: 13, color: Colors.grey[600]),
-                                // )
-                              ],
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // IconButton(
+                          //   onPressed :(){print('button clicked');},
+                          //   icon: Icon(Icons.close),
+                          //   color: Colors.red,
+                          // ),
+                          ElevatedButton.icon(
+                            onPressed: () async {
+                              try {
+                                final image = await controller!.takePicture();
+                                setState(() {
+                                  imagePath = image.path;
+                                });
+                                getRecognisedText(image);
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFF490808), // Background color
                             ),
+                            icon: Icon( // <-- Icon
+                              Icons.camera_alt,
+                              size: 24.0,
+                              color: Color(0xFFFFFFFF),
+                            ),
+                            label: Text('CAPTURE', style: GoogleFonts.getFont(
+    'Poppins',
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+    color: Color(0xFFFFFFFF),
+    ),), // <-- Text
                           ),
-                        )
+
+                          // IconButton(
+                          //   // onPressed :(){_getData(mycontroller.text);}, //getdata function doen http request, connect na databases en doen... controller.text is wat in textfield staan
+                          //   icon: Icon(Icons.check),
+                          //   color: Colors.green,
+                          //   onPressed: () async {
+                          //     try {
+                          //       final image = await controller!.takePicture();
+                          //       setState(() {
+                          //         imagePath = image.path;
+                          //       });
+                          //       getRecognisedText(image);
+                          //     } catch (e) {
+                          //       print(e);
+                          //     }
+                          //   },
+                          // ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: TextField(
+                        textAlign: TextAlign. center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Scanned Student Number',
+                        ),
+                        controller: mycontroller, //controller beheer die textfield
+                        style: GoogleFonts.getFont(
+                          'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          color: Color(0xFF490808),
+                        ),
+                        // style: TextStyle(color: Color(0xFF490808), fontSize: 20, fontWeight: FontWeight.w500,letterSpacing: 1.5),
+                      ),
+                      ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // IconButton(
+                          //   onPressed :(){print('button clicked');},
+                          //   icon: Icon(Icons.close),
+                          //   color: Colors.red,
+                          // ),
+                          ElevatedButton.icon(
+                            onPressed: () async {
+                              try {
+                                final image = await controller!.takePicture();
+                                setState(() {
+                                  imagePath = image.path;
+                                });
+                                getRecognisedText(image);
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFF490808), // Background color
+                            ),
+                            icon: Icon( // <-- Icon
+                              Icons.camera_alt,
+                              size: 24.0,
+                              color: Color(0xFFFFFFFF),
+                            ),
+                            label: Text('SEND', style: GoogleFonts.getFont(
+                              'Poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: Color(0xFFFFFFFF),
+                            ),), // <-- Text
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Text(
+                        'Output:',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.getFont(
+                          'Poppins',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: Color(0xFF490808),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                         Text(_firstfour.isEmpty ? 'No User' : formatUsers(_firstfour),
+                           style: GoogleFonts.getFont(
+                             'Poppins',
+                             fontWeight: FontWeight.w500,
+                             fontSize: 12,
+                             color: Color(0xFF490808),
+                           ),
+                           // style: GoogleFonts.getFont(
+                           //   'Poppins',
+                           //   fontWeight: FontWeight.w500,
+                           //   letterSpacing: 1.5,
+                           //   color: Color(0xFF490808),
+                           // ),
+                         )
+                            //_users is 'n list soos ek define het. Check is users is empty is, (list met niks in nie) (bv as database nie oop is nie) as true, ... , as falsegaan deur list en kry EERSTE instance met ## numbber en gee name' het
+                        ],
+                      ),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  child: TextField(
-                    textAlign: TextAlign. center,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Scanned Student Number',
-                    ),
-                    controller: mycontroller, //controller beheer die textfield
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,letterSpacing: 1.5),
-                  ),
-                  ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 5, horizontal: 5),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // IconButton(
-                      //   onPressed :(){print('button clicked');},
-                      //   icon: Icon(Icons.close),
-                      //   color: Colors.red,
-                      // ),
-                      IconButton(
-                        // onPressed :(){_getData(mycontroller.text);}, //getdata function doen http request, connect na databases en doen... controller.text is wat in textfield staan
-                        icon: Icon(Icons.check),
-                        color: Colors.green,
-                        onPressed: () async {
-                          try {
-                            final image = await controller!.takePicture();
-                            setState(() {
-                              imagePath = image.path;
-                            });
-                            getRecognisedText(image);
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 5, horizontal: 5),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                     Text(_firstfour.isEmpty ? 'No User' : formatUsers(_firstfour),
-                       style: GoogleFonts.getFont(
-                         'Poppins',
-                         fontWeight: FontWeight.w500,
-                         letterSpacing: 1.5,
-                       ),
-                     )
-                        //_users is 'n list soos ek define het. Check is users is empty is, (list met niks in nie) (bv as database nie oop is nie) as true, ... , as falsegaan deur list en kry EERSTE instance met ## numbber en gee name' het
-                    ],
-                  ),
-                ),
-              ],
-            )),
-      )),
+                )),
+      ),
+            ],
+          )),
     );
   }
 
@@ -383,11 +530,14 @@ class _MyHomePageState extends State<MyHomePage> {
     // var url = 'http://192.168.56.1/firstfourgroups.php?studentnumber='+formattednumber; //EMULATOR REAL DATABASE
     // var url = 'http://192.168.56.1/firstfourgroups.php?studentnumber='+number; //EMULATOR REAL DATABASE
     // var url = 'http://192.168.56.1/firstfourgroups.php?studentnumber='+number; //MOBILE REAL DATABASE
-    var url = 'http://10.0.2.59/firstfourgroups.php?studentnumber='+number;
+    // var url = 'http://10.0.2.59/firstfourgroups.php?studentnumber='+number;
+    // var url = 'http://leadebruijn.infinityfreeapp.com/firstfourgroups_online.php?studentnumber='+number;
+    // var url = 'http://leadebruijn.infinityfreeapp.com/firstfourgroups_online.php?studentnumber=25344293';
+    var url = 'https://heruko-demo2022.herokuapp.com?studentnumber='+number;
 
 
     http.get(Uri.parse(url)).then((data) { //sit url in regte formaat
-      print('hello');
+      print(data.body);
       return json.decode(data.body); //maak seker dis in json formaat
     }).then((data) {
       _firstfour.clear(); //clear list
