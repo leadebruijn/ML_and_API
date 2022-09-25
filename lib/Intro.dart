@@ -43,7 +43,6 @@ class Intro extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                   child: Container(
@@ -296,7 +295,7 @@ class Intro extends StatelessWidget {
                       maxHeight: double.infinity,
                     ),
                     width: MediaQuery.of(context).size.width,
-                    height: 200,
+                    height: 230,
                     decoration: BoxDecoration(
                       color: Color(0xFFFFF6CD),
                       borderRadius: BorderRadius.circular(4),
@@ -377,7 +376,7 @@ class Intro extends StatelessWidget {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
                           child: Text(
-                            'Click below to start scanning:',
+                            'Ensure your device is connected to a secure wifi network.\n\nClick below to start scanning:',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.getFont(
                               'Poppins',

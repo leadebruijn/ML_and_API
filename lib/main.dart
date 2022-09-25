@@ -1,17 +1,17 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
-import 'package:image_picker/image_picker.dart';
+import 'dart:convert'; //ja
+import 'dart:io';//ja
+import 'package:google_fonts/google_fonts.dart'; //ja
+import 'package:flutter/material.dart'; //ja
+import 'package:google_ml_kit/google_ml_kit.dart';//ja
+import 'package:image_picker/image_picker.dart';//ja
 import 'package:text_recognition/landing.dart';
 import 'package:text_recognition/user.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;//ja
 import 'Intro.dart';
 import 'firstfourgroups.dart';
 import 'user.dart';
 import 'package:localregex/localregex.dart';
-import 'package:camera/camera.dart';
+import 'package:camera/camera.dart';//ja
 
 //String regEx = "^[0-9]{8}$"; iets soos dit????
 List<CameraDescription>? cameras;
@@ -87,6 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Color(0xFFFFF6CD),
       body: Center(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Padding(
@@ -95,7 +96,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   MaterialButton(
                     color: Color(0xFF490808),
                     shape: const CircleBorder(),
-                    onPressed: () {},
+                    onPressed: () {
+
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Intro()),
+                                          );
+                    },
                     child: const Padding(
                       padding: EdgeInsets.all(3),
                       child: Text(
@@ -333,17 +341,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           //   color: Colors.red,
                           // ),
                           ElevatedButton.icon(
-                            onPressed: () async {
-                              try {
-                                final image = await controller!.takePicture();
-                                setState(() {
-                                  imagePath = image.path;
-                                });
-                                getRecognisedText(image);
-                              } catch (e) {
-                                print(e);
-                              }
-                            },
+                            onPressed :(){_getData(mycontroller.text);}, //getdata function doen http request, connect na databases en doen... controller.text is wat in textfield staan,
                             style: ElevatedButton.styleFrom(
                               primary: Color(0xFF490808), // Background color
                             ),
@@ -402,7 +400,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
       ),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 
@@ -534,7 +534,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // var url = 'http://leadebruijn.infinityfreeapp.com/firstfourgroups_online.php?studentnumber='+number;
     // var url = 'http://leadebruijn.infinityfreeapp.com/firstfourgroups_online.php?studentnumber=25344293';
     var url = 'https://heruko-demo2022.herokuapp.com?studentnumber='+number;
-
 
     http.get(Uri.parse(url)).then((data) { //sit url in regte formaat
       print(data.body);
